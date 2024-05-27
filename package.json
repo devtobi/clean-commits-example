@@ -1,0 +1,22 @@
+{
+  "name": "clean-commits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "prepare": "node .husky/install.mjs && git config --local core.editor cat",
+    "commit": "cz"
+  },
+  "keywords": [],
+  "author": "Tobias Stadler",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/cz-commitlint": "^19.2.0",
+    "commitizen": "^4.3.0",
+    "husky": "^9.0.11",
+    "inquirer": "9"
+  }
+}
