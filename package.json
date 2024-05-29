@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "prepare": "node .husky/install.mjs && git config --local core.editor cat",
+    "lint": "prettier --check . && eslint .",
+    "fix": "prettier --write . && eslint --fix .",
     "commit": "cz"
   },
   "keywords": [],
@@ -16,7 +18,11 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/cz-commitlint": "^19.2.0",
     "commitizen": "^4.3.0",
+    "eslint": "^9.3.0",
+    "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.11",
-    "inquirer": "9"
+    "inquirer": "9",
+    "lint-staged": "^15.2.5",
+    "prettier": "^3.2.5"
   }
 }
