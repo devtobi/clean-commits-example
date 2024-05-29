@@ -127,6 +127,6 @@ Distributed under the MIT License. See [LICENSE][license-url] for more informati
 [pr-shield]: https://img.shields.io/github/issues-pr-raw/devtobi/clean-commits-example?style=for-the-badge&logo=github&label=Pull%20Requests
 [pr-url]: https://github.com/devtobi/clean-commits-example/pulls?q=is%3Apr+is%3Aopen
 [license-shield]: https://img.shields.io/github/license/devtobi/clean-commits-example.svg?style=for-the-badge&logo=github
-[license-url]: https://github.com/devtobi/clean-commits-example/blob/master/LICENSE
+[license-url]: https://github.com/devtobi/clean-commits-example/blob/main/LICENSE
 [commit-shield]: https://img.shields.io/github/last-commit/devtobi/clean-commits-example?style=for-the-badge&logo=github
-[commit-url]: https://github.com/devtobi/clean-commits-example/commit/master
+[commit-url]: https://github.com/devtobi/clean-commits-example/commit/main
