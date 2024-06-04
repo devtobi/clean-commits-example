@@ -98,12 +98,12 @@ The project manages its dependencies via [bun](https://bun.sh) (in my opinion th
 Just try changing any file and create a commit with the git-cli via `git commit -m "mymessage"`. This project uses conventional commit, so your commit must be in the format `type(scope): description`.
 Try breaking the scheme and check the failing commit.
 
-**Tip**: The used convention by `commitlint` is defined in `commitlint.config.js`. You can experiment with other conventions or even extend with your own specific needs by providing custom rules.
+**Tip**: The used convention by `commitlint` is defined in `commitlint.config.mjs`. You can experiment with other conventions or even extend with your own specific needs by providing custom rules.
 
 If you need help writing your commit just run `bun run commit` or `git commit` and an interactive CLI will pop-up that helps you writing your commit message.
 
-To test running formatters and linters, e.g. put a invalid change for a JavaScript file (e.g. `commitlint.config.js`) in your staging area and try to commit it. You will see the linter will complain and your commit will not be done.
-This behaviour is defined in the `.lintstagedrc.js` file, where you can set which tools to execute for specific file patterns.
+To test running formatters and linters, e.g. put a invalid change for a JavaScript file (e.g. `commitlint.config.mjs`) in your staging area and try to commit it. You will see the linter will complain and your commit will not be done.
+This behaviour is defined in the `.lintstagedrc.json` file, where you can set which tools to execute for specific file patterns.
 
 For more examples, please visit the documentation of the tools.
 
