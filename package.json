@@ -1,9 +1,8 @@
 {
   "name": "clean-commits",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.mjs",
-  "type": "module",
+  "description": "Example repository on how to do clean commits with the help of tools like husky, commitlint and commitizen.",
+  "private": true,
   "scripts": {
     "prepare": "node .husky/install.mjs && git config --local core.editor cat",
     "lint": "prettier --check . && eslint .",
