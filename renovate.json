@@ -22,6 +22,7 @@
     ":rebaseStalePrs",
     ":renovatePrefix",
     ":semanticCommits",
+    ":semanticCommitScope(deps)",
     ":separateMultipleMajorReleases",
     ":separateMultipleMinorReleases"
   ]
