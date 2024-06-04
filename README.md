@@ -64,9 +64,9 @@ I assume you have a current version of [git](https://git-scm.com) running on you
 
 Because the tools heavily rely on Node you need to have a up-to-date (LTS) version of [Node](https://nodejs.org/en) installed on your system.
 
-The project manages its dependencies via [pnpm](https://pnpm.io/installation) (in my opinion the better npm, never went back). You need to have `pnpm` installed on your system if you want this repository to work out-of-the-box.
+The project manages its dependencies via [bun](https://bun.sh) (in my opinion the better npm, never went back). You need to have `bun` installed on your system if you want this repository to work out-of-the-box.
 
-**Tip**: If you (for some reason) don't want or can't use `pnpm`, see step 2 in installation below.
+**Tip**: If you (for some reason) don't want or can't use `bun`, see step 2 in installation below.
 
 ### Installation
 
@@ -76,19 +76,19 @@ The project manages its dependencies via [pnpm](https://pnpm.io/installation) (i
    git clone https://github.com/devtobi/clean-commits-example.git
    ```
 
-2. (**Optional**): Switch to `npm` (if you don't have `pnpm`):
+2. (**Optional**): Switch to `npm` (if you don't have `bun`):
 
-   - Replace hook call inside `.husky` directory to use `npm` instead of `pnpm`
-   - Remove `pnpm-lock.yaml` from the file system
+   - Replace hook call inside `.husky` directory to use `npm` instead of `bun`
+   - Remove `bun.lockb` from the file system
 
 3. Install dependencies:
 
-   - pnpm: `pnpm install` or
+   - bun: `bun install` or
    - npm: `npm install`
 
 4. Initialize the git hooks via `husky`:
 
-   - pnpm: `pnpm run prepare` or
+   - bun: `bun run prepare` or
    - npm: `npm run prepare`
 
 5. You are ready to go and checkout the features setup in this repository! Congratulations!
@@ -98,12 +98,12 @@ The project manages its dependencies via [pnpm](https://pnpm.io/installation) (i
 Just try changing any file and create a commit with the git-cli via `git commit -m "mymessage"`. This project uses conventional commit, so your commit must be in the format `type(scope): description`.
 Try breaking the scheme and check the failing commit.
 
-**Tip**: The used convention by `commitlint` is defined in `commitlint.config.js`. You can experiment with other conventions or even extend with your own specific needs by providing custom rules.
+**Tip**: The used convention by `commitlint` is defined in `commitlint.config.mjs`. You can experiment with other conventions or even extend with your own specific needs by providing custom rules.
 
-If you need help writing your commit just run `pnpm run commit` or `git commit` and an interactive CLI will pop-up that helps you writing your commit message.
+If you need help writing your commit just run `bun run commit` or `git commit` and an interactive CLI will pop-up that helps you writing your commit message.
 
-To test running formatters and linters, e.g. put a invalid change for a JavaScript file (e.g. `commitlint.config.js`) in your staging area and try to commit it. You will see the linter will complain and your commit will not be done.
-This behaviour is defined in the `.lintstagedrc.js` file, where you can set which tools to execute for specific file patterns.
+To test running formatters and linters, e.g. put a invalid change for a JavaScript file (e.g. `commitlint.config.mjs`) in your staging area and try to commit it. You will see the linter will complain and your commit will not be done.
+This behaviour is defined in the `.lintstagedrc.json` file, where you can set which tools to execute for specific file patterns.
 
 For more examples, please visit the documentation of the tools.
 
