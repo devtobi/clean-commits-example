@@ -1,6 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:best-practices",
+    "customManagers:githubActionsVersions",
+    "security:openssf-scorecard",
+    ":approveMajorUpdates",
+    ":assignAndReview(devtobi)",
+    ":automergeDisabled",
+    ":dependencyDashboardApproval",
+    ":disableRateLimiting",
+    ":enableRenovate",
+    ":enableVulnerabilityAlertsWithLabel(security)",
+    ":ignoreUnstable",
+    ":labels(renovate,dependency)",
+    ":npm",
+    ":pinAllExceptPeerDependencies",
+    ":prConcurrentLimitNone",
+    ":preserveSemverRanges",
+    ":prHourlyLimitNone",
+    ":prNotPending",
+    ":rebaseStalePrs",
+    ":renovatePrefix",
+    ":semanticCommits",
+    ":separateMultipleMajorReleases",
+    ":separateMultipleMinorReleases"
   ]
 }
