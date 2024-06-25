@@ -52,6 +52,13 @@ Furthermore:
 - [@commitlint/config-conventional](@commitlint/config-conventional) (as a example convention to use for commit messages, in my opinion also the best)
 - [@commitlint/cz-commitlint](https://www.npmjs.com/package/@commitlint/cz-commitlint) (to integrate commitlint configuration with commitizen)
 
+Documentation for the tools mentioned:
+
+- [husky documentation](https://typicode.github.io/husky/how-to.html)
+- [commitlint documentation](https://commitlint.js.org/reference/configuration.html)
+- [commitizen documentation](http://commitizen.github.io/cz-cli/)
+- [lint-staged documentation](https://github.com/lint-staged/lint-staged?tab=readme-ov-file#configuration)
+
 ## Getting Started
 
 To try out the mechanisms for yourself, you can use this repository as a 'playground' locally on your computer.
@@ -81,33 +88,104 @@ The project manages its dependencies via [bun](https://bun.sh) (in my opinion th
    - Replace hook call inside `.husky` directory to use `npm` instead of `bun`
    - Remove `bun.lockb` from the file system
 
-3. Install dependencies:
+3. Install dependencies and initialize the git hooks via `husky`:
 
    - bun: `bun install` or
    - npm: `npm install`
 
-4. Initialize the git hooks via `husky`:
+4. You are ready to go and checkout the features setup in this repository! Congratulations!
 
-   - bun: `bun run prepare` or
-   - npm: `npm run prepare`
+## husky
 
-5. You are ready to go and checkout the features setup in this repository! Congratulations!
+The tool `husky` integrates the above-mentioned tools `commitlint`, `commitizen` and `lint-staged` into the normal workflow with `git` via Git Hooks. Tools can therefore be integrated via regular commands such as `git commit`.
+
+**Tip**: Git Hooks can be created file-based via the `.husky` folder and Git Hooks can be shared with all project members. These must therefore always be checked in to VCS.
+
+An `npm install` (see step 2 above) also installs the hooks. Alternatively, the script `npm run prepare` can be called explicitly.
+
+**Attention**: After changing a hook, all developers must run `npm run prepare` again to activate the changes on their own machine.
 
 ## Usage
 
-Just try changing any file and create a commit with the git-cli via `git commit -m "mymessage"`. This project uses conventional commit, so your commit must be in the format `type(scope): description`.
-Try breaking the scheme and check the failing commit.
+### 1. Perform valid commit
 
-**Tip**: The used convention by `commitlint` is defined in `commitlint.config.mjs`. You can experiment with other conventions or even extend with your own specific needs by providing custom rules.
+First try to change the example file `dummy.txt` and create a commit using `git commit -m "mymessage"`. This project uses the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#specification) convention, so the commit message must correspond to the format `type(scope): description`.
 
-If you need help writing your commit just run `bun run commit` or `git commit` and an interactive CLI will pop-up that helps you writing your commit message.
+Example: `git commit -m "refactor(api): refactored dummy api endpoint"`
 
-To test running formatters and linters, e.g. put a invalid change for a JavaScript file (e.g. `commitlint.config.mjs`) in your staging area and try to commit it. You will see the linter will complain and your commit will not be done.
-This behaviour is defined in the `.lintstagedrc.json` file, where you can set which tools to execute for specific file patterns.
+The commit should be successful.
 
-For more examples, please visit the documentation of the tools.
+### 2. Perform invalid commit
 
-<!-- AUTHORS -->
+Change the `dummy.txt` again and try a second commit. This time, however, explicitly violate the configured convention.
+
+Example: `git commit -m "This is a test"`
+
+The commit should fail and `commitlint` should display a message about the errors and warnings found in the message. It looks like this, for example:
+
+<img src="./docs/commitlint-output.png" alt="Error output from commitlint" width="50%"/>
+
+The convention used by `commitlint` is defined in [`commitlint.config.mjs`](commitlint.config.mjs). You can experiment with other conventions by installing [additional npm packages](https://www.npmjs.com/search?q=commitlint%2Fconfig) or extend the configuration file to meet your own specific needs by [creating your own rules](https://commitlint.js.org/reference/rules-configuration.html).
+
+A minimal configuration for `commitlint` looks like this (and follows the convention "Conventional Commits"):
+
+```js
+export default {
+  extends: ["@commitlint/config-conventional"],
+};
+```
+
+### 3. Commit interactively
+
+If you need help writing your commit message, simply run `git commit` and the interactive CLI `commitizen` will appear to assist you according to the configured convention.
+
+The interactive interface will look like this:
+
+<img src="./docs/commitizen-output.png" alt="Output of commitizen" width="50%"/>
+
+The interactive CLI can be configured via the file [`.czrc`](/.czrc). There are various [adapter packages](https://github.com/commitizen/cz-cli?tab=readme-ov-file#adapters) to support different conventions.
+
+**Tip:** We recommend using the adapter [`@commitlint/cz-commitlint`](https://www.npmjs.com/package/@commitlint/cz-commitlint), as this integrates the two tools `commitlint` and `commitizen` and the `commitlint` configuration is also automatically used for the interactive CLI.
+
+A minimal configuration for `commitizen` (with inheritance of the `commitlint` convention) looks as follows:
+
+```json
+{
+  "path": "@commitlint/cz-commitlint"
+}
+```
+
+### 4. Linting and formatting before committing
+
+Put an invalid change to the file `dummy.js` in the git staging area (via IDE or via `git add dummy.js`) and try to commit it. `lint-staged` scans files in the staging area and has them checked by the configured tools. An error should then have occurred due to `prettier` or `eslint`, depending on whether it is a formatting problem or a coding problem. The commit was not carried out.
+
+An example error message looks like this:
+
+<img src="./docs/lintstaged-output.png" alt="Output from lint-staged" width="25%"/>
+
+The linter and formatter to be used by `lint-staged` can be configured in the file [`.lintstagedrc.json`](/.lintstagedrc.json). CLI tools to be executed are specified here using pattern matching on file extensions. If several patterns are matched, several tools are also executed in parallel.
+
+An example configuration for `lint-staged` looks as follows:
+
+```json
+{
+  "*.{js,ts}": ["eslint"],
+  "*": "prettier --check"
+}
+```
+
+With the above configuration, for example, a `dummy.js` file is checked in parallel using `eslint` and `prettier --check`. A file `dummy.json` would only be checked by `prettier --check`. More information on the configuration can be found [in the official documentation](https://github.com/lint-staged/lint-staged?tab=readme-ov-file#configuration).
+
+### End
+
+Congratulations! You have tried out all the use cases!
+
+Further examples can be found in the documentation of the tools used:
+
+- [husky documentation](https://typicode.github.io/husky/how-to.html)
+- [commitlint documentation](https://commitlint.js.org/reference/configuration.html)
+- [commitizen documentation](http://commitizen.github.io/cz-cli/)
+- [lint-staged-documentation](https://github.com/lint-staged/lint-staged?tab=readme-ov-file#configuration)
 
 ## Authors
 
