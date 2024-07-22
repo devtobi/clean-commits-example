@@ -6,8 +6,7 @@
   "scripts": {
     "prepare": "node .husky/install.mjs && git config --local core.editor cat",
     "lint": "prettier --check . && eslint .",
-    "fix": "prettier --write . && eslint --fix .",
-    "commit": "cz"
+    "fix": "prettier --write . && eslint --fix ."
   },
   "keywords": [],
   "author": "Tobias Stadler",
