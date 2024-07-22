@@ -5,4 +5,4 @@ if [ "$COMMIT_SRC" = "message" ]; then
     exit 0
 fi
 
-exec < /dev/tty && bun cz --hook || true
+exec < /dev/tty && cz --hook || true
