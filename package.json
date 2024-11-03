@@ -12,9 +12,9 @@
   "author": "Tobias Stadler",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "19.3.0",
-    "@commitlint/config-conventional": "19.2.2",
-    "@commitlint/cz-commitlint": "19.2.0",
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0",
+    "@commitlint/cz-commitlint": "19.5.0",
     "commitizen": "4.3.1",
     "eslint": "9.8.0",
     "eslint-config-prettier": "9.1.0",
